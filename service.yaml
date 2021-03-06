@@ -4,7 +4,7 @@ metadata:
   name: demodocker-jenkins-depl-service
   namespace: default
   selfLink: /api/v1/namespaces/default/services/demodocker-jenkins-depl-service
-  uid: 7b3bf2ab-7f40-40ad-abea-8fa2a736d0c8
+  uid: dc5cdac3-878d-4a86-a9d1-ff7d279ade1c
   labels:
     app: demodocker-jenkins-depl
     name: demodocker-jenkins-depl-service
@@ -22,13 +22,15 @@ spec:
       protocol: TCP
       port: 81
       targetPort: 80
-      nodePort: 30233
+      nodePort: 30152
   selector:
     app: test
-  clusterIP: 10.247.18.249
+  clusterIP: 10.247.8.34
   type: LoadBalancer
   sessionAffinity: None
   loadBalancerIP: 200.10.111.104
   externalTrafficPolicy: Cluster
 status:
-  loadBalancer: {}
+  loadBalancer:
+    ingress:
+      - ip: 200.10.111.104
