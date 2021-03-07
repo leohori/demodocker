@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: demodocker-jenkins-container
-        image: 100.125.0.106:20202/leo_hori/demodocker-jenkins:$BUILD_NUMBER
+        image: 200.10.97.41/leo_hori/demo-jenkins-github:$BUILD_NUMBER
         ports:
         - containerPort: 80
       imagePullSecrets:
