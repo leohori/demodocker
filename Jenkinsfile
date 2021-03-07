@@ -9,7 +9,7 @@ pipeline {
   
 stages {
     
-    stage('Building image') {
+    stage('Building Docker Image') {
       steps{
         script {
             dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -17,7 +17,7 @@ stages {
       }
     }
     
-stage('Send to SWR'){
+stage('Send to SWR Repo'){
       steps{
         script {
           docker.withRegistry('https://swr.sa-argentina-1.myhuaweicloud.com', registryCredential ) {
