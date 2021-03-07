@@ -4,7 +4,6 @@ metadata:
   name: demodocker-jenkins-depl-service
   namespace: default
   selfLink: /api/v1/namespaces/default/services/demodocker-jenkins-depl-service
-  uid: dc5cdac3-878d-4a86-a9d1-ff7d279ade1c
   labels:
     app: demodocker-jenkins-depl
     name: demodocker-jenkins-depl-service
