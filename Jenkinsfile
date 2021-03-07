@@ -9,7 +9,7 @@ pipeline {
   
 stages {
     
-    stage('Building Docker Image') {
+    stage('Build Docker Image') {
       steps{
         script {
             dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -17,7 +17,7 @@ stages {
       }
     }
     
-stage('Send to SWR Repo'){
+stage('Send Image to SWR Repo'){
       steps{
         script {
           docker.withRegistry('https://swr.sa-argentina-1.myhuaweicloud.com', registryCredential ) {
@@ -27,7 +27,7 @@ stage('Send to SWR Repo'){
       }
     }
 
-stage('Deploy to Kubernetes'){
+stage('Deploy Image to Kubernetes'){
 		steps{
 		  script {
 			kubernetesDeploy(configs: '*.yaml', dockerCredentials: [[credentialsId: 'swr-credentials-argentina', url: 'https://swr.sa-argentina-1.myhuaweicloud.com']], kubeConfig: [path: ''],kubeconfigId: 'kubernetes-credentials-argentina', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://'])
