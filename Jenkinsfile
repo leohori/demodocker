@@ -6,13 +6,6 @@ pipeline {
   }
   
   agent any
-  
-stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/leohori/demodocker.git'
-      }
-    }
     
     stage('Building image') {
       steps{
