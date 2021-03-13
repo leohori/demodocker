@@ -1,7 +1,7 @@
 pipeline {
   environment {
     dockerImage = ''
-    registry = "leo_hori/demo-jenkins-github"
+    registry = "desarrollo/guestbook-jenkins-github"
     registryCredential = 'swr-credentials-argentina'
   }
   
