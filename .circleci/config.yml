@@ -5,7 +5,7 @@ jobs:
   build_frontend_image:
     machine:
       image: ubuntu-2004:202010-01
-    working_directory: /tmp/_circleci_local_build_repo/*
+    working_directory: /tmp/repo/*
     steps:
       - checkout
       - run:
