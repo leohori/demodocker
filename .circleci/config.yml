@@ -1,6 +1,12 @@
 version: 2.1
 
 # Define the jobs we want to run for this project
+
+env-vars:
+    jobs:
+      - build:
+          context: guestbook
+
 jobs:
   build_frontend_image:
     machine:
@@ -13,7 +19,6 @@ jobs:
           command: |
             TAG=1
             IMAGE=frontend
-            APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
             docker build -t $IMAGE:$TAG -f .$DOCKERFILE .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
