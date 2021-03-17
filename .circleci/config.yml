@@ -3,8 +3,7 @@ version: 2.1
 # Define the jobs we want to run for this project
 jobs:
   build_frontend_image:
-    docker:
-      - image: docker:17.05.0-ce-git
+    machine: true
     steps:
       - checkout
       - run:
@@ -21,51 +20,9 @@ jobs:
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
-  build_redis_master_image:
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Build Redis Master image and push it to the SWR repo
-          command: |
-            TAG=1
-            IMAGE=redis_master
-            DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
-            DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
-            DOCKER_REGISTRY_PASSWORD=68b251ee63b61e28f0488a616cf144e5d234db6957f6559839dbb6ffd4eb302d
-            ORGANIZATION=garba-desarrollo
-            DOCKERFILE_PATH=/guestbook/$IMAGE
-            docker build -t $IMAGE:$TAG -f .$DOCKERFILE_PATH/Dockerfile .
-            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
-            docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
-  build_redis_slave_image:
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Build Redis Slave image and push it to the SWR repo
-          command: |
-            TAG=1
-            IMAGE=redis_slave
-            DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
-            DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
-            DOCKER_REGISTRY_PASSWORD=68b251ee63b61e28f0488a616cf144e5d234db6957f6559839dbb6ffd4eb302d
-            ORGANIZATION=garba-desarrollo
-            DOCKERFILE_PATH=/guestbook/$IMAGE
-            docker build -t $IMAGE:$TAG -f .$DOCKERFILE_PATH/Dockerfile .
-            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
-            docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
 
 # Orchestrate our job run sequence
 workflows:
   build_and_push:
     jobs:
       - build_frontend_image
-      - build_redis_master_image
-      - build_redis_slave_image
