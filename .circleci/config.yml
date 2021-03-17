@@ -79,13 +79,7 @@ jobs:
           command: |
             sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
             sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-            sudo cd /home
-            sudo chmod +x kubectl
-            sudo mv -f kubectl /usr/local/bin
-            sudo mkdir -p $HOME/.kube
-            sudo mv -f ./kubectl/kubeconfig.json $HOME/.kube/config
-            sudo kubectl config use-context external
-            sudo sh deploy.sh
+            
             
 # Orchestrate our job run sequence
 workflows:
