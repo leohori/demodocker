@@ -13,6 +13,7 @@ jobs:
           command: |
             TAG=1
             IMAGE=frontend
+            APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
             DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
             DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
@@ -34,6 +35,7 @@ jobs:
           command: |
             TAG=1
             IMAGE=redis_master
+            APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
             DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
             DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
@@ -55,6 +57,7 @@ jobs:
           command: |
             TAG=1
             IMAGE=redis_slave
+            APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
             DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
             DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
