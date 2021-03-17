@@ -9,11 +9,57 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build Frontend image and push it to the SWR repo
+          name: Build Frontend image and push it to the Huawei Cloud SWR repo
           command: |
             TAG=1
             IMAGE=frontend
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
+            DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
+            DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
+            DOCKER_REGISTRY_PASSWORD=68b251ee63b61e28f0488a616cf144e5d234db6957f6559839dbb6ffd4eb302d
+            ORGANIZATION=garba-desarrollo
+            docker build -t $IMAGE:$TAG -f .$DOCKERFILE .
+            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
+            docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
+            docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
+
+  build_redis_master_image:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: /tmp/repo/*
+    steps:
+      - checkout
+      - run:
+          name: Build Redis Master image and push it to the Huawei Cloud SWR repo
+          command: |
+            TAG=1
+            IMAGE=redis_master
+            DOCKERFILE=/$APP/$IMAGE/Dockerfile
+            DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
+            DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
+            DOCKER_REGISTRY_PASSWORD=68b251ee63b61e28f0488a616cf144e5d234db6957f6559839dbb6ffd4eb302d
+            ORGANIZATION=garba-desarrollo
+            docker build -t $IMAGE:$TAG -f .$DOCKERFILE .
+            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
+            docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
+            docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
+
+  build_redis_slave_image:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: /tmp/repo/*
+    steps:
+      - checkout
+      - run:
+          name: Build Redis Slave image and push it to the Huawei Cloud SWR repo
+          command: |
+            TAG=1
+            IMAGE=redis_slave
+            DOCKERFILE=/$APP/$IMAGE/Dockerfile
+            DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
+            DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
+            DOCKER_REGISTRY_PASSWORD=68b251ee63b61e28f0488a616cf144e5d234db6957f6559839dbb6ffd4eb302d
+            ORGANIZATION=garba-desarrollo
             docker build -t $IMAGE:$TAG -f .$DOCKERFILE .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
@@ -24,3 +70,5 @@ workflows:
   build_and_push:
     jobs:
       - build_frontend_image
+      - build_redis_master_image
+      - build_redis_slave_image
