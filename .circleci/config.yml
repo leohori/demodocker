@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: frontend:1
+      - image: nginx:latest
     steps:
       - checkout
   docker-image:
