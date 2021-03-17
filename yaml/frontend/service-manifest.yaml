@@ -1,0 +1,38 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend-srv
+  namespace: garba-desarrollo
+  uid: 9554d1f1-cdc8-46bf-a3fa-0856d63df8be
+  resourceVersion: '7439'
+  creationTimestamp: '2021-03-15T19:52:27Z'
+  labels:
+    app: guestbook
+    name: frontend
+  annotations:
+    kubernetes.io/elb.class: union
+    kubernetes.io/elb.health-check-flag: 'on'
+    kubernetes.io/elb.health-check-option: '{"protocol":"TCP","delay":"5","timeout":"10","max_retries":"3"}'
+    kubernetes.io/elb.id: 25caa854-c881-4baf-9eea-56e9702fa579
+    kubernetes.io/elb.lb-algorithm: ROUND_ROBIN
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+spec:
+  ports:
+    - name: cce-service-0
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 32456
+  selector:
+    app: guestbook
+    tier: frontend
+  clusterIP: 10.247.91.228
+  type: LoadBalancer
+  sessionAffinity: None
+  loadBalancerIP: 119.8.152.255
+  externalTrafficPolicy: Cluster
+status:
+  loadBalancer:
+    ingress:
+      - ip: 119.8.152.255
