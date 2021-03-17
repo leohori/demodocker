@@ -18,7 +18,7 @@ jobs:
             DOCKER_REGISTRY_USER=la-south-2@D7LBOW4H1X356K7EA798
             DOCKER_REGISTRY_PASSWORD=68b251ee63b61e28f0488a616cf144e5d234db6957f6559839dbb6ffd4eb302d
             ORGANIZATION=garba-desarrollo
-            docker build -t $IMAGE:$TAG -f guestbook/frontend/Dockerfile .
+            docker build -t $IMAGE:$TAG -f guestbook/redis_master/Dockerfile .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
