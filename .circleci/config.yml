@@ -77,6 +77,8 @@ jobs:
       - run:
           name: Deploy the images in SWR of the Guestbook App to Kubernetes on Huawei Cloud
           command: |
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            echo "$(<kubectl.sha256) kubectl" | sha256sum --check
             sh deploy.sh
             
 # Orchestrate our job run sequence
