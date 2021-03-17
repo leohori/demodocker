@@ -3,12 +3,13 @@ version: 2.1
 # Define the jobs we want to run for this project
 jobs:
   build-frontend:
-    working_directory: /guestbook/frontend
-    machine: true
+    docker:
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
+      - setup_remote_docker
       - run:
-          name: docker-image
+          name: Build frontend image and push it to the SWR repo
           command: |
             TAG=1
             IMAGE=frontend
