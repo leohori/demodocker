@@ -5,12 +5,12 @@ jobs:
   build-frontend:
     docker:
       - image: docker:17.05.0-ce-git
-    working_directory: /guestbook/frontend
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Build frontend image and push it to the SWR repo
+          path: /guestbook/frontend
           command: |
             TAG=1
             IMAGE=frontend
