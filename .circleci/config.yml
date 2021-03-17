@@ -70,7 +70,7 @@ jobs:
 
   deploy_to_kubernetes:
     machine:
-      image: ubuntu-2004:202010-01
+      image: docker pull swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
     working_directory: /tmp/repo/*
     steps:
       - checkout
@@ -78,7 +78,6 @@ jobs:
           name: Deploy the images in SWR of the Guestbook App to Kubernetes on Huawei Cloud
           command: |
             sudo cd /tmp
-            sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
             
             
 # Orchestrate our job run sequence
