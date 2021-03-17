@@ -78,8 +78,13 @@ jobs:
           name: Deploy the images in SWR of the Guestbook App to Kubernetes on Huawei Cloud
           command: |
             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-            sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-            kubectl version --client
+            install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+            cd /home
+            chmod +x kubectl
+            mv -f kubectl /usr/local/bin
+            mkdir -p $HOME/.kube
+            mv -f ./kubectl/kubeconfig.json $HOME/.kube/config
+            kubectl config use-context external
             sh deploy.sh
             
 # Orchestrate our job run sequence
