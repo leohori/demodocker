@@ -24,4 +24,3 @@ workflows:
   build_and_push:
     jobs:
       - build_frontend_image
-context: guestbook
