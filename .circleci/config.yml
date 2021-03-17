@@ -1,11 +1,6 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: nginx:latest
-    steps:
-      - checkout
-  docker-image:
     machine: true
     steps:
       - checkout
