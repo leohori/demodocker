@@ -3,7 +3,8 @@ version: 2.1
 # Define the jobs we want to run for this project
 jobs:
   build_frontend_image:
-    machine: true
+    machine:
+      image: ubuntu-2004:202010-01
     working_directory: guestbook/frontend
     steps:
       - checkout
