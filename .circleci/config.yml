@@ -68,6 +68,17 @@ jobs:
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
 
+  deploy_to_kubernetes:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: /tmp/repo/*
+    steps:
+      - checkout
+      - run:
+          name: Deploy the images in SWR of the Guestbook App to Kubernetes on Huawei Cloud
+          command: |
+            sh deploy.sh
+            
 # Orchestrate our job run sequence
 workflows:
   build_and_push:
@@ -75,3 +86,4 @@ workflows:
       - build_frontend_image
       - build_redis_master_image
       - build_redis_slave_image
+      - deploy_to_kubernetes
