@@ -15,7 +15,7 @@ jobs:
             ORGANIZATION=garba-desarrollo
             PATH_APP=guestbook/frontend
             docker build -t $IMAGE:$TAG .
-            docker build $PATH_APP -t $IMAGE:$TAG -f $PATH_APP/frontend/Dockerfile
+            docker build ./$PATH_APP -t $IMAGE:$TAG -f ./$PATH_APP/frontend/Dockerfile
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
