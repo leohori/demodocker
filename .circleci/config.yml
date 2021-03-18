@@ -1,6 +1,5 @@
 version: 2.1
 
-# Define the jobs we want to run for this project
 jobs:
   deploy_to_kubernetes:
     docker:
@@ -76,8 +75,14 @@ jobs:
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG            
             
-# Orchestrate our job run sequence
 workflows:
   build_and_push:
     jobs:
-      - deploy_to_kubernetes
+      - build_frontend_image
+      - build_redis_master_image
+      - build_redis_slave_image
+      - deploy_to_kubernetes:
+          requires:
+          - build_frontend_image
+          - build_redis_master_image
+          - build_redis_slave_image
