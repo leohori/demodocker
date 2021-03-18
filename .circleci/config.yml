@@ -7,7 +7,8 @@ jobs:
       - image: swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
     working_directory: /tmp/repo/*
     steps:
-      - run: sh .deploy.sh
+      - checkout
+      - run: sh ./deploy.sh
 
   build_frontend_image:
     machine:
