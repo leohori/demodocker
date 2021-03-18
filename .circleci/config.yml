@@ -66,22 +66,12 @@ jobs:
             docker build -t $IMAGE:$TAG -f .$DOCKERFILE .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
-
-  deploy_to_kubernetes:
-    machine:
-      image: swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
-    working_directory: /tmp/repo/*
-    steps:
-      - checkout
-      - run:
-          name: Deploy the images in SWR of the Guestbook App to Kubernetes on Huawei Cloud
-          command: |
-            sudo cd /tmp
-            
+            docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG            
             
 # Orchestrate our job run sequence
 workflows:
   build_and_push:
     jobs:
-      - deploy_to_kubernetes
+      - build_frontend_image
+      - build_redis_master_image
+      - build_redis_slave_image
