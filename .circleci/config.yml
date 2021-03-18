@@ -1,14 +1,6 @@
 version: 2.1
 
 jobs:
-  deploy_to_kubernetes:
-    docker:
-      - image: swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
-    working_directory: /tmp/repo/*
-    steps:
-      - checkout
-      - run: sh ./deploy.sh
-
   build_frontend_image:
     machine:
       image: ubuntu-2004:202010-01
@@ -74,9 +66,16 @@ jobs:
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY/$ORGANIZATION/$IMAGE:$TAG            
-            
+  deploy_to_kubernetes:
+    docker:
+      - image: swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
+    working_directory: /tmp/repo/*
+    steps:
+      - checkout
+      - run: sh ./deploy.sh
+                  
 workflows:
-  build_and_push:
+  build_push_deploy:
     jobs:
       - build_frontend_image
       - build_redis_master_image
