@@ -70,7 +70,7 @@ jobs:
 
   deploy_to_kubernetes:
     machine:
-      image: docker pull swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
+      image: swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
     working_directory: /tmp/repo/*
     steps:
       - checkout
