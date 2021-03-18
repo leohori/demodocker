@@ -8,7 +8,7 @@ jobs:
     working_directory: /tmp/repo/*
     steps:
       - checkout
-      - run: sh ./deploy.sh
+      - run: cat ./deploy.sh
 
   build_frontend_image:
     machine:
