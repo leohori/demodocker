@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   deploy_to_kubernetes:
     docker:
-      - image: docker pull swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
+      - image: swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
     steps:
       - run: kubectl get pods
 
