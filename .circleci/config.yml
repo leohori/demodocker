@@ -2,6 +2,12 @@ version: 2.1
 
 # Define the jobs we want to run for this project
 jobs:
+  deploy_to_kubernetes:
+    docker:
+      - image: docker pull swr.la-south-2.myhuaweicloud.com/garba-desarrollo/kubectl-garba:1
+    steps:
+      - run: kubectl get pods
+
   build_frontend_image:
     machine:
       image: ubuntu-2004:202010-01
@@ -72,6 +78,4 @@ jobs:
 workflows:
   build_and_push:
     jobs:
-      - build_frontend_image
-      - build_redis_master_image
-      - build_redis_slave_image
+      - deploy_to_kubernetes
