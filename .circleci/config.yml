@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Build Frontend image and push it to the Huawei Cloud SWR repo
           command: |
-            TAG=1
+            TAG=2
             IMAGE=frontend
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
