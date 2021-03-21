@@ -10,6 +10,7 @@ jobs:
       - run:
           name: Build Frontend image and push it to the Huawei Cloud SWR repo
           command: |
+            go get github.com/tcnksm/ghr
             TAG=$(my-binary --version)
             IMAGE=frontend
             APP=guestbook
