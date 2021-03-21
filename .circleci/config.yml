@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Build Frontend image and push it to the Huawei Cloud SWR repo
           command: |
-            TAG=${CIRCLE_TAG/v/''}
+            TAG=$(cat _tag)
             IMAGE=frontend
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Build Redis Master image and push it to the Huawei Cloud SWR repo
           command: |
-            TAG=${CIRCLE_TAG/v/''}
+            TAG=$(cat _tag)
             IMAGE=redis_master
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
@@ -54,7 +54,7 @@ jobs:
       - run:
           name: Build Redis Slave image and push it to the Huawei Cloud SWR repo
           command: |
-            TAG=${CIRCLE_TAG/v/''}
+            TAG=$(cat _tag)
             IMAGE=redis_slave
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
