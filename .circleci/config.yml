@@ -3,7 +3,6 @@ version: 2.1
 jobs:
   build_frontend_image:
     machine:
-      docker_layer_caching: true
       image: ubuntu-2004:202010-01
     working_directory: /tmp/repo/*
     steps:
@@ -11,7 +10,7 @@ jobs:
       - run:
           name: Build Frontend image and push it to the Huawei Cloud SWR repo
           command: |
-            TAG=3
+            TAG=$(my-binary --version)
             IMAGE=frontend
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
@@ -26,7 +25,6 @@ jobs:
 
   build_redis_master_image:
     machine:
-      docker_layer_caching: true
       image: ubuntu-2004:202010-01
     working_directory: /tmp/repo/*
     steps:
@@ -49,7 +47,6 @@ jobs:
 
   build_redis_slave_image:
     machine:
-      docker_layer_caching: true
       image: ubuntu-2004:202010-01
     working_directory: /tmp/repo/*
     steps:
