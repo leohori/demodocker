@@ -15,7 +15,7 @@ jobs:
             IMAGE=frontend
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
-            DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
+            DOCKER_REGISTRY=$DOCKER_REGISTRY
             DOCKER_REGISTRY_USER=la-south-2@XHFAQQ88S48TMQXKZIGH
             DOCKER_REGISTRY_PASSWORD=5b31700488aab2a0543e997b56f004a3303a09022e878cf30476d8ddafe0eb28
             ORGANIZATION=garba-desarrollo
@@ -86,3 +86,4 @@ workflows:
           - build_frontend_image
           - build_redis_master_image
           - build_redis_slave_image
+          context: guestbook
