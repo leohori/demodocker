@@ -79,11 +79,7 @@ jobs:
 workflows:
   build_push_deploy:
     jobs:
-      - build_frontend_image
       - build_redis_master_image
-      - build_redis_slave_image
       - deploy_to_kubernetes:
           requires:
-          - build_frontend_image
           - build_redis_master_image
-          - build_redis_slave_image
