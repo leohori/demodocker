@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend-container
-        image: '100.125.3.34:20202/garba-desarrollo/frontend:2'
+        image: '100.125.3.34:20202/garba-desarrollo/frontend:${CIRCLE_SHA1}'
         resources:
           requests:
             cpu: 100m
