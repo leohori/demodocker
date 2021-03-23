@@ -5,14 +5,14 @@ ini_set('display_errors', 1);
 require 'Predis/Autoloader.php';
 Predis\Autoloader::register();
 if (isset($_GET['cmd']) === true) {
-  $host = 'redis-master-srv';
+  $host = 'redis-master-srv-2';
   header('Content-Type: application/json');
   if ($_GET['cmd'] == 'set') {
     $client = new Predis\Client(['scheme' => 'tcp', 'host' => $host, 'port' => 6379,]);
     $client->set($_GET['key'], $_GET['value']);
     print('{"message": "Updated"}');
   } else {
-    $host = 'redis-slave-srv';
+    $host = 'redis-slave-srv-2';
     $client = new Predis\Client(['scheme' => 'tcp', 'host' => $host, 'port' => 6379,]);
     $value = $client->get($_GET['key']);
     print('{"data": "' . $value . '"}');
