@@ -34,7 +34,7 @@ jobs:
           name: Build Redis Master image and push it to the Huawei Cloud SWR repo
           command: |
             TAG=${CIRCLE_SHA1}
-            IMAGE=redis_master
+            IMAGE=redis-master
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
             DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
@@ -56,7 +56,7 @@ jobs:
           name: Build Redis Slave image and push it to the Huawei Cloud SWR repo
           command: |
             TAG=${CIRCLE_SHA1}
-            IMAGE=redis_slave
+            IMAGE=redis-slave
             APP=guestbook
             DOCKERFILE=/$APP/$IMAGE/Dockerfile
             DOCKER_REGISTRY=swr.la-south-2.myhuaweicloud.com
