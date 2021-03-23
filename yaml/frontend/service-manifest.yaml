@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: frontend-srv
+  name: frontend-srv-2
   namespace: garba-desarrollo
   uid: 9554d1f1-cdc8-46bf-a3fa-0856d63df8be
   resourceVersion: '7439'
