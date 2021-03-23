@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: redis-master-container
-        image: '100.125.3.34:20202/garba-desarrollo/redis_master:${CIRCLE_SHA1}'
+        image: '100.125.3.34:20202/garba-desarrollo/redis_master:'${CIRCLE_SHA1}
         resources:
           requests:
             cpu: 100m
