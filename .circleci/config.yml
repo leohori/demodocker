@@ -73,7 +73,8 @@ jobs:
     working_directory: /tmp/repo/*
     steps:
       - checkout
-      - run: sh ./deploy.sh
+      - run: export CIRCLE_SHA1=${CIRCLE_SHA1} |
+             sh ./deploy.sh
                   
 workflows:
   build_push_deploy:
