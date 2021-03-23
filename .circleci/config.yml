@@ -73,7 +73,7 @@ jobs:
     working_directory: /tmp/repo/*
     steps:
       - checkout
-      - run: export CIRCLE_SHA1=${CIRCLE_SHA1} |
+      - run: sed -i "s/IMAGE_TAG/${TAG}/g" ./yaml/redis_master/deployment-manifest.yaml |
              sh ./deploy.sh
                   
 workflows:
